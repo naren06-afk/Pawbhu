@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>for Pawbhu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Lora:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3E3;
+    --paper:#FFFDF8;
+    --ink:#2E2418;
+    --ink-soft:#5C4C38;
+    --gold:#D79A2C;
+    --gold-deep:#B97A1A;
+    --burgundy:#7A2E35;
+    --sage:#6E7B4F;
+    --line: rgba(46,36,24,0.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Lora', serif;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  /* ---------- Field backdrop ---------- */
+  .field{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(1200px 700px at 50% -10%, rgba(215,154,44,0.10), transparent 60%),
+      linear-gradient(180deg, var(--cream) 0%, #F7ECD6 100%);
+  }
+  .drift-petal{
+    position:absolute; width:14px; height:14px; opacity:0.5;
+    background:linear-gradient(180deg,var(--gold),var(--gold-deep));
+    border-radius:60% 5% 60% 5%;
+    animation: drift 18s linear infinite;
+  }
+  @keyframes drift{
+    0%{ transform:translateY(-5vh) rotate(0deg); opacity:0;}
+    10%{opacity:0.5;}
+    90%{opacity:0.4;}
+    100%{ transform:translateY(105vh) rotate(360deg); opacity:0;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:92vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:8vh 6vw 4vh;
+    position:relative;
+  }
+  .hero-sun{
+    width:min(46vw, 300px); height:min(46vw,300px);
+    margin-bottom:2.2rem;
+    animation: bloom 1.8s cubic-bezier(.2,.9,.25,1) both, spin 90s linear infinite 1.8s;
+    filter: drop-shadow(0 18px 30px rgba(107,52,32,0.20));
+  }
+  @keyframes bloom{
+    0%{ transform:scale(0.4) rotate(-25deg); opacity:0;}
+    100%{ transform:scale(1) rotate(0deg); opacity:1;}
+  }
+  @keyframes spin{
+    100%{ transform:rotate(360deg);}
+  }
+  .eyebrow{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.2rem,2.4vw,1.6rem);
+    color:var(--burgundy);
+    letter-spacing:0.04em;
+    margin:0 0 0.4rem;
+  }
+  h1.title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:clamp(2.8rem,8vw,5.6rem);
+    line-height:1.02;
+    margin:0 0 0.6rem;
+    color:var(--ink);
+  }
+  h1.title em{
+    font-style:italic;
+    color:var(--gold-deep);
+  }
+  .subline{
+    font-family:'Jost', sans-serif;
+    font-size:clamp(0.85rem,1.3vw,1rem);
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin-top:0.8rem;
+  }
+  .scroll-cue{
+    position:absolute; bottom:4vh; left:50%; transform:translateX(-50%);
+    font-family:'Jost', sans-serif;
+    font-size:0.78rem; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--ink-soft); opacity:0.7;
+    display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+  }
+  .scroll-cue::after{
+    content:"";
+    width:1px; height:34px;
+    background:linear-gradient(var(--ink-soft), transparent);
+    animation: pulse-line 2s ease-in-out infinite;
+  }
+  @keyframes pulse-line{
+    0%,100%{opacity:0.25;} 50%{opacity:0.9;}
+  }
+
+  /* ---------- Message ---------- */
+  .message-section{
+    max-width:680px;
+    margin:0 auto;
+    padding:6vh 7vw 10vh;
+  }
+  .message-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:clamp(2.4rem,5vw,4rem);
+    box-shadow:0 30px 60px -35px rgba(74,36,21,0.35);
+    position:relative;
+  }
+  .message-card::before{
+    content:"";
+    position:absolute; top:14px; left:14px; right:14px; bottom:14px;
+    border:1px solid rgba(215,154,44,0.35);
+    pointer-events:none;
+  }
+  .message-body{
+    font-size:clamp(1.08rem,2vw,1.3rem);
+    line-height:1.85;
+    color:var(--ink);
+  }
+  .message-body p{ margin:0 0 1.3em; }
+  .message-body p:first-of-type::first-letter{
+    font-family:'Cormorant Garamond', serif;
+    font-size:3.6em;
+    float:left;
+    line-height:0.8;
+    padding:0.08em 0.09em 0 0;
+    color:var(--burgundy);
+    font-weight:600;
+  }
+  .signoff{
+    margin-top:1.6rem;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:1.5rem;
+    color:var(--gold-deep);
+    text-align:right;
+  }
+
+  .divider{
+    display:flex; align-items:center; justify-content:center; gap:1rem;
+    color:var(--gold-deep);
+    margin:0 auto 3vh;
+    max-width:300px;
+  }
+  .divider .line{ flex:1; height:1px; background:var(--line); }
+  .divider svg{ width:22px; height:22px; }
+
+  /* ---------- Player ---------- */
+  .player-section{
+    max-width:640px;
+    margin:0 auto;
+    padding:2vh 6vw 14vh;
+  }
+  .player-heading{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:clamp(1.6rem,3.4vw,2.1rem);
+    color:var(--ink);
+    margin-bottom:2.4rem;
+  }
+  .player-card{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:clamp(1.6rem,4vw,2.6rem);
+    box-shadow:0 30px 70px -40px rgba(74,36,21,0.4);
+  }
+
+  .now-playing{
+    display:flex; align-items:center; gap:1.4rem;
+    margin-bottom:1.6rem;
+  }
+  .art-wrap{
+    width:104px; height:104px; flex:none; border-radius:50%;
+    overflow:hidden; position:relative;
+    box-shadow:0 10px 24px -10px rgba(74,36,21,0.5);
+    border:1px solid rgba(215,154,44,0.4);
+  }
+  .art-wrap img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    animation: rotate-art 14s linear infinite;
+    animation-play-state: paused;
+  }
+  .art-wrap.playing img{ animation-play-state: running; }
+  @keyframes rotate-art{ 100%{ transform:rotate(360deg);} }
+  .art-wrap::after{
+    content:""; position:absolute; inset:38%; border-radius:50%;
+    background:var(--paper); box-shadow:inset 0 0 0 1px rgba(0,0,0,0.08);
+  }
+
+  .track-meta{ min-width:0; }
+  .track-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.5rem; font-weight:600;
+    margin:0 0 0.15rem;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .track-artist{
+    font-family:'Jost', sans-serif;
+    font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--ink-soft); margin:0;
+  }
+
+  .controls{
+    display:flex; align-items:center; justify-content:center; gap:1.6rem;
+    margin-bottom:1.4rem;
+  }
+  .ctrl-btn{
+    background:none; border:none; cursor:pointer; color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    padding:0.4rem; transition:transform 0.15s ease, color 0.15s ease;
+  }
+  .ctrl-btn:hover{ color:var(--burgundy); transform:translateY(-1px); }
+  .ctrl-btn:focus-visible{ outline:2px solid var(--gold-deep); outline-offset:3px; border-radius:50%; }
+  .ctrl-btn svg{ width:22px; height:22px; }
+  .play-btn{
+    width:58px; height:58px; border-radius:50%;
+    background:linear-gradient(180deg,var(--gold),var(--gold-deep));
+    color:var(--paper);
+    box-shadow:0 12px 24px -10px rgba(185,122,26,0.6);
+  }
+  .play-btn:hover{ color:var(--paper); }
+  .play-btn svg{ width:24px; height:24px; }
+
+  .progress-row{
+    display:flex; align-items:center; gap:0.7rem;
+    font-family:'Jost', sans-serif; font-size:0.72rem; color:var(--ink-soft);
+    margin-bottom:1.8rem;
+  }
+  .progress-track{
+    flex:1; height:5px; border-radius:3px; background:rgba(46,36,24,0.12);
+    position:relative; cursor:pointer;
+  }
+  .progress-fill{
+    position:absolute; left:0; top:0; bottom:0; width:0%;
+    background:linear-gradient(90deg,var(--gold-deep),var(--gold));
+    border-radius:3px;
+  }
+  .progress-fill::after{
+    content:""; position:absolute; right:-5px; top:50%; translate:0 -50%;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--paper); border:2px solid var(--gold-deep);
+  }
+
+  .playlist{
+    border-top:1px solid var(--line);
+    padding-top:1rem;
+    display:flex; flex-direction:column; gap:0.2rem;
+    max-height:340px; overflow-y:auto;
+  }
+  .track-row{
+    display:flex; align-items:center; gap:0.9rem;
+    padding:0.7rem 0.6rem;
+    border-radius:4px; cursor:pointer;
+    background:transparent; border:none; text-align:left;
+    font-family:'Lora', serif; color:var(--ink);
+    transition:background 0.15s ease;
+  }
+  .track-row:hover{ background:rgba(215,154,44,0.10); }
+  .track-row.active{ background:rgba(215,154,44,0.18); }
+  .track-row:focus-visible{ outline:2px solid var(--gold-deep); outline-offset:-2px; }
+  .track-num{
+    font-family:'Jost', sans-serif; font-size:0.78rem; color:var(--ink-soft);
+    width:1.4rem; flex:none; text-align:center;
+  }
+  .track-row.active .track-num{ color:var(--burgundy); font-weight:600; }
+  .track-row-art{
+    width:38px; height:38px; border-radius:50%; flex:none; overflow:hidden;
+    border:1px solid rgba(215,154,44,0.4);
+  }
+  .track-row-art img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .track-row-title{ font-size:1rem; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .track-row-dur{ font-family:'Jost', sans-serif; font-size:0.75rem; color:var(--ink-soft); flex:none; }
+  .track-row.active .track-row-title{ color:var(--burgundy); }
+
+  footer{
+    text-align:center; padding:0 0 6vh;
+    font-family:'Cormorant Garamond', serif; font-style:italic;
+    color:var(--ink-soft); font-size:1rem;
+  }
+</style>
+</head>
+<body>
+<div class="field" id="field"></div>
+
+<section class="hero">
+  <img class="hero-sun" src="assets/covers/sunflower-hero.svg" alt="An illustrated sunflower" />
+  <p class="eyebrow">a little something for</p>
+  <h1 class="title">Pawbhu <em>&mdash; happy birthday</em></h1>
+  <p class="subline">Meghna &middot; today is entirely yours</p>
+  <div class="scroll-cue">scroll gently</div>
+</section>
+
+<section class="message-section">
+  <div class="message-card">
+    <div class="message-body">
+      <p>Happy birthday, Pawbhu. Another year has turned, and somehow you only get more impossible to describe &mdash; the good kind of impossible, the kind that no single sentence can hold.</p>
+      <p>I hope today feels unhurried and warm, the way a sunflower turns itself toward whatever light it can find. You have a way of doing that to the people around you too, quietly pointing everyone toward something brighter.</p>
+      <p>I put together a few of the songs you keep going back to, the ones that sound like your voice when you're humming them without noticing. Scroll down and press play &mdash; think of it as a small, off-key love letter.</p>
+      <p>Here's to you, exactly as you are, for one more year and every one after.</p>
+    </div>
+    <p class="signoff">&mdash; always, your favourite person (allegedly)</p>
+  </div>
+</section>
+
+<div class="divider">
+  <div class="line"></div>
+  <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" fill="currentColor"/><g stroke="currentColor" stroke-width="1.4"><path d="M12 2v3M12 19v3M22 12h-3M5 12H2M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1M18.4 18.4l-2.1-2.1M7.7 7.7L5.6 5.6"/></g></svg>
+  <div class="line"></div>
+</div>
+
+<section class="player-section" id="player">
+  <p class="player-heading">songs you keep replaying</p>
+  <div class="player-card">
+    <div class="now-playing">
+      <div class="art-wrap" id="artWrap">
+        <img id="nowArt" src="assets/covers/sunflower-01.svg" alt="Track artwork" />
+      </div>
+      <div class="track-meta">
+        <p class="track-title" id="nowTitle">Bandhu Tomaye</p>
+        <p class="track-artist" id="nowArtist">&mdash;</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="ctrl-btn" id="prevBtn" aria-label="Previous track">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6L10 12l10 6z"/></svg>
+      </button>
+      <button class="ctrl-btn play-btn" id="playBtn" aria-label="Play">
+        <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="nextBtn" aria-label="Next track">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6l10 6-10 6z"/></svg>
+      </button>
+    </div>
+
+    <div class="progress-row">
+      <span id="curTime">0:00</span>
+      <div class="progress-track" id="progressTrack">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span id="durTime">0:00</span>
+    </div>
+
+    <div class="playlist" id="playlist"></div>
+  </div>
+</section>
+
+<footer>made with a little sunlight, for you &#127803;</footer>
+
+<audio id="audioEl" preload="metadata"></audio>
+
+<script>
+const tracks = [
+  { title:"Bandhu Tomaye", artist:"", src:"assets/audio/01-bandhu-tomaye.mp3", art:"assets/covers/sunflower-01.svg" },
+  { title:"Tomar Jonno Nilche Tara", artist:"Arnob", src:"assets/audio/02-tomar-jonno-nilche-tara.mp3", art:"assets/covers/sunflower-02.svg" },
+  { title:"Jonaki", artist:"", src:"assets/audio/03-jonaki.mp3", art:"assets/covers/sunflower-03.svg" },
+  { title:"Ogo Bideshini", artist:"Anjan Dutt \u00b7 Rabindra Sangeet", src:"assets/audio/04-ogo-bideshini.mp3", art:"assets/covers/sunflower-04.svg" },
+  { title:"Mone", artist:"", src:"assets/audio/05-mone.mp3", art:"assets/covers/sunflower-05.svg" },
+  { title:"Amar Bhindeshi Tara", artist:"Chondrobindu", src:"assets/audio/06-amar-bhindeshi-tara.mp3", art:"assets/covers/sunflower-06.svg" },
+  { title:"Tomar Priyo Ritu Barsha Tai", artist:"", src:"assets/audio/07-tomar-priyo-ritu-barsha-tai.mp3", art:"assets/covers/sunflower-07.svg" },
+  { title:"She Je Boshe Ache", artist:"Arnob Chowdhury", src:"assets/audio/08-she-je-boshe-ache.mp3", art:"assets/covers/sunflower-08.svg" },
+];
+
+let current = 0;
+let isPlaying = false;
+
+const audioEl = document.getElementById('audioEl');
+const playBtn = document.getElementById('playBtn');
+const playIcon = document.getElementById('playIcon');
+const pauseIcon = document.getElementById('pauseIcon');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const nowArt = document.getElementById('nowArt');
+const artWrap = document.getElementById('artWrap');
+const nowTitle = document.getElementById('nowTitle');
+const nowArtist = document.getElementById('nowArtist');
+const progressFill = document.getElementById('progressFill');
+const progressTrack = document.getElementById('progressTrack');
+const curTimeEl = document.getElementById('curTime');
+const durTimeEl = document.getElementById('durTime');
+const playlistEl = document.getElementById('playlist');
+
+function fmtTime(s){
+  if(!isFinite(s)) return "0:00";
+  const m = Math.floor(s/60);
+  const sec = Math.floor(s%60).toString().padStart(2,'0');
+  return `${m}:${sec}`;
+}
+
+function renderPlaylist(){
+  playlistEl.innerHTML = tracks.map((t,i)=>`
+    <button class="track-row${i===current?' active':''}" data-index="${i}">
+      <span class="track-num">${(i+1).toString().padStart(2,'0')}</span>
+      <span class="track-row-art"><img src="${t.art}" alt="" /></span>
+      <span class="track-row-title">${t.title}${t.artist? ' &mdash; '+t.artist : ''}</span>
+      <span class="track-row-dur" data-dur="${i}">--:--</span>
+    </button>
+  `).join('');
+  playlistEl.querySelectorAll('.track-row').forEach(row=>{
+    row.addEventListener('click', ()=>{
+      const idx = parseInt(row.dataset.index,10);
+      loadTrack(idx, true);
+    });
+  });
+}
+
+function loadTrack(index, autoplay){
+  current = (index + tracks.length) % tracks.length;
+  const t = tracks[current];
+  audioEl.src = t.src;
+  nowArt.src = t.art;
+  nowTitle.textContent = t.title;
+  nowArtist.textContent = t.artist || '\u2014';
+  progressFill.style.width = '0%';
+  curTimeEl.textContent = '0:00';
+  document.querySelectorAll('.track-row').forEach((row,i)=>{
+    row.classList.toggle('active', i===current);
+  });
+  if(autoplay){
+    audioEl.play().then(()=> setPlaying(true)).catch(()=> setPlaying(false));
+  } else {
+    setPlaying(false);
+  }
+}
+
+function setPlaying(playing){
+  isPlaying = playing;
+  playIcon.style.display = playing ? 'none' : 'block';
+  pauseIcon.style.display = playing ? 'block' : 'none';
+  playBtn.setAttribute('aria-label', playing ? 'Pause' : 'Play');
+  artWrap.classList.toggle('playing', playing);
+}
+
+playBtn.addEventListener('click', ()=>{
+  if(!audioEl.src){ loadTrack(0, true); return; }
+  if(isPlaying){ audioEl.pause(); setPlaying(false); }
+  else { audioEl.play().then(()=>setPlaying(true)); }
+});
+
+prevBtn.addEventListener('click', ()=> loadTrack(current-1, isPlaying));
+nextBtn.addEventListener('click', ()=> loadTrack(current+1, isPlaying));
+
+audioEl.addEventListener('timeupdate', ()=>{
+  if(audioEl.duration){
+    progressFill.style.width = (audioEl.currentTime/audioEl.duration*100)+'%';
+    curTimeEl.textContent = fmtTime(audioEl.currentTime);
+  }
+});
+audioEl.addEventListener('loadedmetadata', ()=>{
+  durTimeEl.textContent = fmtTime(audioEl.duration);
+  const durSpan = playlistEl.querySelector(`[data-dur="${current}"]`);
+  if(durSpan) durSpan.textContent = fmtTime(audioEl.duration);
+});
+audioEl.addEventListener('ended', ()=> loadTrack(current+1, true));
+
+progressTrack.addEventListener('click', (e)=>{
+  const rect = progressTrack.getBoundingClientRect();
+  const ratio = (e.clientX - rect.left) / rect.width;
+  if(audioEl.duration) audioEl.currentTime = ratio * audioEl.duration;
+});
+
+// preload durations quietly for playlist display
+tracks.forEach((t,i)=>{
+  const probe = new Audio();
+  probe.preload = 'metadata';
+  probe.src = t.src;
+  probe.addEventListener('loadedmetadata', ()=>{
+    const span = playlistEl.querySelector(`[data-dur="${i}"]`);
+    if(span) span.textContent = fmtTime(probe.duration);
+  });
+});
+
+renderPlaylist();
+loadTrack(0, false);
+
+// drifting petals
+const field = document.getElementById('field');
+for(let i=0;i<10;i++){
+  const p = document.createElement('div');
+  p.className = 'drift-petal';
+  p.style.left = (Math.random()*100)+'vw';
+  p.style.animationDelay = (Math.random()*18)+'s';
+  p.style.animationDuration = (14+Math.random()*10)+'s';
+  p.style.opacity = 0.25 + Math.random()*0.3;
+  field.appendChild(p);
+}
+</script>
+</body>
+</html>
